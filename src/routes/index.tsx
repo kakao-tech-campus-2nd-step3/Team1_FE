@@ -4,14 +4,15 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+
 import { Layout } from "../components/features/Layout";
 import { HomePage } from "../pages/Home";
-import { LoginPage } from "../pages/Login";
-import { SignupPage } from "../pages/Signup";
-import { ProjectListPage } from "../pages/ProjectList";
-import { ProjectPage } from "../pages/Project";
-import { MemberDetailsPage } from "../pages/MemberDetails";
 import { JoinProjectPage } from "../pages/JoinProject";
+import { LoginPage } from "../pages/Login";
+import { MemberDetailsPage } from "../pages/MemberDetails";
+import { ProjectPage } from "../pages/Project";
+import { ProjectListPage } from "../pages/ProjectList";
+import { SignupPage } from "../pages/Signup";
 import { RouterPath } from "./path";
 
 const router = createBrowserRouter([
