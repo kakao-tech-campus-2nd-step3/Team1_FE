@@ -1,3 +1,3 @@
 export const ProjectPage = () => {
-      return <div>project</div>;
-    };
+  return <div>project</div>;
+};

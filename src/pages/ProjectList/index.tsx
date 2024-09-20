@@ -1,3 +1,3 @@
 export const ProjectListPage = () => {
-      return <div>ProjectList</div>;
-    };
+  return <div>ProjectList</div>;
+};

@@ -1,3 +1,3 @@
 export const JoinProjectPage = () => {
-      return <div>join</div>;
-    };
+  return <div>join</div>;
+};
