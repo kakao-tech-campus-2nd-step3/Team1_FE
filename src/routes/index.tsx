@@ -29,18 +29,18 @@ const router = createBrowserRouter([
         element: <ProjectListPage />,
       },
       {
-        path: RouterPath.project,
-        element: <ProjectPage />,
-      },
-      {
-        path: RouterPath.memberDetails,
-        element: <MemberDetailsPage />,
-      },
-      {
         path: RouterPath.joinProject,
         element: <JoinProjectPage />,
       },
     ],
+  },
+  {
+    path: RouterPath.memberDetails,
+    element: <MemberDetailsPage />,
+  },
+  {
+    path: RouterPath.project,
+    element: <ProjectPage />,
   },
   {
     path: RouterPath.login,
