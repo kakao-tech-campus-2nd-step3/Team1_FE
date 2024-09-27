@@ -3,7 +3,7 @@ import { Box, Button, Container, Flex, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { ProgressAccorodion } from './ProgressAccordion';
-import { Sidebar } from './Sidebar';
+import { Sidebar } from './SidebarSection/index';
 
 export const Project = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
