@@ -36,6 +36,7 @@ export const ProgressAccorodion = () => {
                 width="80%"
                 height={5}
                 borderRadius="full"
+                margin={3}
               />
             </AccordionButton>
 

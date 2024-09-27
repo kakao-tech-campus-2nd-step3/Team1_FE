@@ -1,5 +1,5 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Button, Container, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { ProgressAccorodion } from './ProgressAccordion';
@@ -17,8 +17,7 @@ export const Project = () => {
         onClick={onOpen}
         borderRadius="full"
         backgroundColor="transparent"
-        _hover={{ backgroundColor: 'gray.200' }}
-        _active={{ backgroundColor: 'gray.300' }}
+        _hover={{ backgroundColor: 'gray.100' }}
         margin={3}
       >
         <HamburgerIcon boxSize={5} />
@@ -33,22 +32,22 @@ export const Project = () => {
       >
         <Container maxW="container.xl" p={5}>
           <Flex justifyContent="space-between" alignItems="center" py={6}>
-            <Text fontSize="4xl" fontWeight="bold">
+            <Text fontSize="5xl" fontWeight="bold">
               Project
             </Text>
             <Flex>
               <Button {...buttonStyle} mr={4}>
                 팀원 관리
               </Button>
-              <Button {...buttonStyle} mr={4}>
-                프로젝트 설정
-              </Button>
+              <Button {...buttonStyle}>프로젝트 설정</Button>
             </Flex>
           </Flex>
         </Container>
 
         <Container maxW="container.xl" padding={6}>
-          <ProgressAccorodion />
+          <Stack spacing={6}>
+            <ProgressAccorodion />
+          </Stack>
         </Container>
       </Box>
     </>
