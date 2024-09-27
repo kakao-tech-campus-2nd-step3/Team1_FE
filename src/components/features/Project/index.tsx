@@ -1,5 +1,7 @@
 import { Button, Container, Flex, Text } from '@chakra-ui/react';
 
+import { ProgressAccorodion } from './ProgressAccordion';
+
 export const Project = () => {
   return (
     <>
@@ -17,6 +19,10 @@ export const Project = () => {
             </Button>
           </Flex>
         </Flex>
+      </Container>
+
+      <Container maxW="container.xl" padding={6}>
+        <ProgressAccorodion />
       </Container>
     </>
   );
