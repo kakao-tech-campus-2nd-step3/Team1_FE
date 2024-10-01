@@ -13,6 +13,8 @@ export const Project = () => {
 
   return (
     <>
+      <Sidebar isOpen={isOpen} onClose={onClose} />
+
       {!isOpen && (
         <Button
           onClick={onOpen}
@@ -20,13 +22,11 @@ export const Project = () => {
           backgroundColor="transparent"
           _hover={{ backgroundColor: 'gray.100' }}
           margin={3}
-          zIndex={10}
+          zIndex={1}
         >
           <HamburgerIcon boxSize={5} />
         </Button>
       )}
-
-      <Sidebar isOpen={isOpen} onClose={onClose} />
 
       <Box
         marginLeft={isOpen ? '320px' : '0'}

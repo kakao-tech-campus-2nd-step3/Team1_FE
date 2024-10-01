@@ -24,7 +24,7 @@ export const ProgressAccordion = () => {
           <AccordionItem>
             <AccordionButton flex="1">
               <AccordionIcon boxSize={10} />
-              <Box as="span" flex="1">
+              <Box minW="100px" flex="1">
                 <Text fontSize="xl" fontWeight="bold">
                   프로젝트 이름
                 </Text>

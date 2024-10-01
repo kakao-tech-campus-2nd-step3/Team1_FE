@@ -10,8 +10,6 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  if (!isOpen) return null;
-
   return (
     <Box
       width="320px"
@@ -19,8 +17,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       bg="gray.100"
       p={4}
       boxShadow="lg"
+      transition="margin-left 0.3s ease, opacity 0.3s ease"
+      marginLeft={isOpen ? '0' : '-320px'}
+      opacity={isOpen ? 1 : 0}
       position="fixed"
-      zIndex={20}
+      zIndex={10}
     >
       <Flex justifyContent="space-between" padding={4}>
         <Link to="/">
@@ -43,13 +44,15 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         <UserProfile />
       </Flex>
 
-      <Text fontSize="20px" fontWeight="bold" pl={4}>
-        Menu
-      </Text>
       <Box padding={4}>
-        <Text mb={4}>프로젝트 홈</Text>
-        <Text mb={4}>진행도</Text>
-        <Text mb={4}>일정 관리</Text>
+        <Text fontSize="20px" fontWeight="bold" mb={4}>
+          Menu
+        </Text>
+        <Flex direction="column" mt={4}>
+          <Text padding={2}>프로젝트 홈</Text>
+          <Text padding={2}>진행도</Text>
+          <Text padding={2}>일정 관리</Text>
+        </Flex>
       </Box>
     </Box>
   );
