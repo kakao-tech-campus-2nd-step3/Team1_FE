@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-export const ProgressAccorodion = () => {
+export const ProgressAccordion = () => {
   return (
     <>
       <Flex

@@ -2,7 +2,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { Box, Button, Container, Flex, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { ProgressAccorodion } from './ProgressAccordion';
+import { ProgressAccordion } from './ProgressAccordion';
 import { Sidebar } from './SidebarSection/index';
 
 export const Project = () => {
@@ -13,29 +13,35 @@ export const Project = () => {
 
   return (
     <>
-      <Button
-        onClick={onOpen}
-        borderRadius="full"
-        backgroundColor="transparent"
-        _hover={{ backgroundColor: 'gray.100' }}
-        margin={3}
-      >
-        <HamburgerIcon boxSize={5} />
-      </Button>
+      {!isOpen && (
+        <Button
+          onClick={onOpen}
+          borderRadius="full"
+          backgroundColor="transparent"
+          _hover={{ backgroundColor: 'gray.100' }}
+          margin={3}
+          zIndex={10}
+        >
+          <HamburgerIcon boxSize={5} />
+        </Button>
+      )}
 
       <Sidebar isOpen={isOpen} onClose={onClose} />
+
       <Box
         marginLeft={isOpen ? '320px' : '0'}
         transition="margin-left 0.3s ease"
         p={4}
         flex="1"
+        zIndex={1}
       >
         <Container maxW="container.xl" p={5}>
           <Flex justifyContent="space-between" alignItems="center" py={6}>
             <Text fontSize="5xl" fontWeight="bold">
               Project
             </Text>
-            <Flex>
+
+            <Flex m={2}>
               <Button {...buttonStyle} mr={4}>
                 팀원 관리
               </Button>
@@ -46,7 +52,7 @@ export const Project = () => {
 
         <Container maxW="container.xl" padding={6}>
           <Stack spacing={6}>
-            <ProgressAccorodion />
+            <ProgressAccordion />
           </Stack>
         </Container>
       </Box>
