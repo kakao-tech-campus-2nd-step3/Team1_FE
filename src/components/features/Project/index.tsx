@@ -2,6 +2,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { Box, Button, Container, Flex, Stack, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
+import { KanbanBoard } from './KanbanBoard';
 import { ProgressAccordion } from './ProgressAccordion';
 import { Sidebar } from './SidebarSection/index';
 
@@ -53,6 +54,7 @@ export const Project = () => {
         <Container maxW="container.xl" padding={6}>
           <Stack spacing={6}>
             <ProgressAccordion />
+            <KanbanBoard />
           </Stack>
         </Container>
       </Box>
