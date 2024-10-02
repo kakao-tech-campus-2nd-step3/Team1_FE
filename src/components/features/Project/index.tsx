@@ -29,7 +29,7 @@ export const Project = () => {
       )}
 
       <Box
-        marginLeft={isOpen ? '320px' : '0'}
+        marginLeft={isOpen ? '250px' : '0'}
         transition="margin-left 0.3s ease"
         p={4}
         flex="1"
