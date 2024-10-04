@@ -1,44 +1,44 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 type Props = {
-  radius?: 'circle' | number;
-  ratio?: 'square' | 'auto' | number;
+  radius?: "circle" | number;
+  ratio?: "square" | "auto" | number;
 } & React.ImgHTMLAttributes<HTMLImageElement>;
 
 export const Image = ({ ...props }: Props) => <Wrapper {...props} />;
 
-const Wrapper = styled.img<Pick<Props, 'ratio' | 'radius'>>(
+const Wrapper = styled.img<Pick<Props, "ratio" | "radius">>(
   {
-    objectFit: 'cover',
-    objectPosition: 'center',
+    objectFit: "cover",
+    objectPosition: "center",
   },
   ({ radius = 0 }) => {
-    if (radius === 'circle') {
+    if (radius === "circle") {
       return {
-        borderRadius: '50%',
+        borderRadius: "50%",
       };
     }
 
-    if (typeof radius === 'number') {
+    if (typeof radius === "number") {
       return {
         borderRadius: `${radius}px`,
       };
     }
   },
-  ({ ratio = 'auto' }) => {
-    if (ratio === 'square') {
+  ({ ratio = "auto" }) => {
+    if (ratio === "square") {
       return {
-        aspectRatio: '1 / 1',
+        aspectRatio: "1 / 1",
       };
     }
 
-    if (ratio === 'auto') {
+    if (ratio === "auto") {
       return {
-        aspectRatio: 'auto',
+        aspectRatio: "auto",
       };
     }
 
-    if (typeof ratio === 'number') {
+    if (typeof ratio === "number") {
       return {
         aspectRatio: `${ratio}`,
       };
