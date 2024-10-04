@@ -9,7 +9,11 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
 import { useState } from 'react';
 
 import { KanbanColumn } from './KanbanColumn';
@@ -135,6 +139,15 @@ export const KanbanBoard = () => {
     if (!over || active.id === over.id) return;
 
     setTasks((updatedTasks) => {
+      const originalTask = tasks.find((task) => task.id === active.id);
+      const targetTask = tasks.find((task) => task.id === over.id);
+
+      if (!originalTask || !targetTask) return updatedTasks;
+
+      if (targetTask.status !== originalTask.status) {
+        originalTask.status = targetTask.status;
+      }
+
       const originalPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
 
@@ -163,11 +176,13 @@ export const KanbanBoard = () => {
         border={'1px solid #D8DADC'}
         borderColor="#D8DADC"
       >
-        <SimpleGrid columns={3} spacing={4} width="100%" p={4}>
-          {columns.map((column) => (
-            <KanbanColumn key={column.status} columns={column} />
-          ))}
-        </SimpleGrid>
+        <SortableContext items={tasks.map((task) => task.id)}>
+          <SimpleGrid columns={3} spacing={4} width="100%" p={4}>
+            {columns.map((column) => (
+              <KanbanColumn key={column.status} columns={column} />
+            ))}
+          </SimpleGrid>
+        </SortableContext>
       </Flex>
     </DndContext>
   );
