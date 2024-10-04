@@ -3,7 +3,7 @@ import { Avatar, Flex, Text } from '@chakra-ui/react';
 export const UserProfile = () => {
   return (
     <Flex alignContent="center">
-      <Avatar src="https://bit.ly/broken-link" size="md" margin={2} />
+      <Avatar src="" size="md" margin={2} />
       <Flex flexDir="column" justifyContent="center">
         <Text fontSize="xl" fontWeight="bold">
           유저명
