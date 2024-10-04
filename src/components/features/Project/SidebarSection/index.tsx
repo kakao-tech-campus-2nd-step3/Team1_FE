@@ -1,13 +1,5 @@
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerHeader,
-  Flex,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 import { UserProfile } from './UserProfile';
@@ -19,43 +11,63 @@ interface SidebarProps {
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   return (
-    <Drawer
-      placement="left"
-      onClose={onClose}
-      isOpen={isOpen}
-      closeOnOverlayClick={false}
+    <Box
+      width="250px"
+      height="100vh"
+      bg="gray.100"
+      p={4}
+      boxShadow="lg"
+      transition="margin-left 0.3s ease, opacity 0.3s ease"
+      marginLeft={isOpen ? '0' : '-250px'}
+      opacity={isOpen ? 1 : 0}
+      position="fixed"
+      zIndex={10}
     >
-      <DrawerContent>
-        <Flex justifyContent="space-between" padding={4}>
-          <Link to="/">
-            <Text fontSize="3xl" fontWeight="bold">
-              Seamless
+      <Flex justifyContent="space-between" padding={2}>
+        <Link to="/">
+          <Text fontSize="3xl" fontWeight="bold">
+            Seamless
+          </Text>
+        </Link>
+
+        <Button
+          onClick={onClose}
+          borderRadius="full"
+          backgroundColor="transparent"
+          _hover={{ backgroundColor: 'gray.200' }}
+        >
+          <ChevronLeftIcon boxSize={5} />
+        </Button>
+      </Flex>
+
+      <Flex padding={2}>
+        <UserProfile />
+      </Flex>
+
+      <Stack padding={2} gap={8}>
+        <Stack gap={2}>
+          <Text fontSize="20px" fontWeight="bold">
+            Menu
+          </Text>
+          <Flex direction="column">
+            <Text mt={2} mb={2}>
+              프로젝트 홈
             </Text>
-          </Link>
+            <Text mt={2} mb={2}>
+              진행도
+            </Text>
+            <Text mt={2} mb={2}>
+              일정 관리
+            </Text>
+          </Flex>
+        </Stack>
 
-          <Button
-            onClick={onClose}
-            borderRadius={'full'}
-            backgroundColor="transparent"
-            display="inline-block"
-            _hover={{ backgroundColor: 'gray.100' }}
-            alignItems={'center'}
-          >
-            <ChevronLeftIcon boxSize={5} />
-          </Button>
-        </Flex>
-
-        <Flex padding={4}>
-          <UserProfile />
-        </Flex>
-
-        <DrawerHeader>Menu</DrawerHeader>
-        <DrawerBody>
-          <Text mb={4}>프로젝트 홈</Text>
-          <Text mb={4}>진행도</Text>
-          <Text mb={4}>일정 관리</Text>
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
+        <Stack gap={2}>
+          <Text fontSize="20px" fontWeight="bold">
+            TODO
+          </Text>
+        </Stack>
+      </Stack>
+    </Box>
   );
 };
