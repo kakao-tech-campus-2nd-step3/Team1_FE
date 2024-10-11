@@ -14,7 +14,7 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import type { TaskStatus, TaskType } from '@/types/index';
 
@@ -22,6 +22,7 @@ import { initialTasks } from './initialTask';
 import { KanbanColumn } from './KanbanColumn';
 
 interface Column {
+  id: string;
   status: TaskStatus;
   tasks: TaskType[];
 }
@@ -29,24 +30,30 @@ interface Column {
 export const KanbanBoard = () => {
   const [tasks, setTasks] = useState<TaskType[]>(initialTasks);
 
-  const getColumns: Column[] = [
-    {
-      status: 'NOT_STARTED',
-      tasks: tasks.filter((task) => task.status === 'NOT_STARTED'),
-    },
-    {
-      status: 'IN_PROGRESS',
-      tasks: tasks.filter((task) => task.status === 'IN_PROGRESS'),
-    },
-    {
-      status: 'COMPLETED',
-      tasks: tasks.filter((task) => task.status === 'COMPLETED'),
-    },
-  ];
+  const getColumns: Column[] = useMemo(() => {
+    return [
+      {
+        id: 'not_started',
+        status: 'NOT_STARTED',
+        tasks: tasks.filter((task) => task.status === 'NOT_STARTED'),
+      },
+      {
+        id: 'in-progress',
+        status: 'IN_PROGRESS',
+        tasks: tasks.filter((task) => task.status === 'IN_PROGRESS'),
+      },
+      {
+        id: 'completed',
+        status: 'COMPLETED',
+        tasks: tasks.filter((task) => task.status === 'COMPLETED'),
+      },
+    ];
+  }, [tasks]);
 
   const getTaskPos = (id: UniqueIdentifier) =>
     tasks.findIndex((task) => task.id === id);
 
+  console.log(getColumns);
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -92,7 +99,7 @@ export const KanbanBoard = () => {
         <SortableContext items={tasks.map((task) => task.id)}>
           <SimpleGrid columns={3} spacing={4} width="100%" p={4}>
             {getColumns.map((column) => (
-              <KanbanColumn key={column.status} columns={column} />
+              <KanbanColumn key={column.id} column={column} />
             ))}
           </SimpleGrid>
         </SortableContext>

@@ -17,39 +17,41 @@ import type { TaskStatus, TaskType } from '@/types/index';
 import { KanbanTask } from './KanbanTask';
 
 interface ColumnProps {
-  columns: {
+  column: {
+    id: string;
     status: TaskStatus;
     tasks: TaskType[];
   };
 }
 
-export const KanbanColumn = ({ columns }: ColumnProps) => {
+export const KanbanColumn = ({ column }: ColumnProps) => {
   return (
-    <Card>
+    <Card key={column.id}>
       <Flex direction="column">
         <CardHeader>
           <Flex>
             <Badge
-              bg={getStatusBadgeColor(columns.status)}
+              bg={getStatusBadgeColor(column.status)}
               p="1"
               width="90px"
               textAlign="center"
               borderRadius="10px"
               fontSize="16px"
             >
-              {statusLabels[columns.status]}
+              {statusLabels[column.status]}
             </Badge>
           </Flex>
         </CardHeader>
         <CardBody>
           <SortableContext
-            items={columns.tasks.map((task) => task.id)}
+            items={column.tasks.map((task) => task.id)}
             strategy={verticalListSortingStrategy}
           >
-            {columns.tasks.map((task) => (
+            {column.tasks.map((task) => (
               <KanbanTask key={task.id} task={task} />
             ))}
           </SortableContext>
+
           <Flex justifyContent="center">
             <IconButton
               isRound={true}
