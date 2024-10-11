@@ -1,20 +1,21 @@
-import React from "react";
+import React from 'react';
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { Layout } from "../components/features/Layout";
-import { HomePage } from "../pages/Home";
-import { JoinProjectPage } from "../pages/JoinProject";
-import { LoginPage } from "../pages/Login";
-import { MemberDetailsPage } from "../pages/MemberDetails";
-import { ProjectPage } from "../pages/Project";
-import { ProjectListPage } from "../pages/ProjectList";
-import { SignupPage } from "../pages/Signup";
-import { RouterPath } from "./path";
-
+import { Layout } from '../components/features/Layout';
+import { ProjectSidebar } from '../components/features/Project/ProjectSidebar';
+import { HomePage } from '../pages/Home';
+import { JoinProjectPage } from '../pages/JoinProject';
+import { LoginPage } from '../pages/Login';
+import { MemberDetailsPage } from '../pages/MemberDetails';
+import { ProjectPage } from '../pages/Project';
+import { ProjectKanbanPage } from '../pages/ProjectKanban';
+import { ProjectListPage } from '../pages/ProjectList';
+import { SignupPage } from '../pages/Signup';
+import { RouterPath } from './path';
 const router = createBrowserRouter([
   {
     path: RouterPath.root,
@@ -40,7 +41,17 @@ const router = createBrowserRouter([
   },
   {
     path: RouterPath.project,
-    element: <ProjectPage />,
+    element: <ProjectSidebar />,
+    children: [
+      {
+        index: true,
+        element: <ProjectPage />,
+      },
+      {
+        path: RouterPath.projectKanban,
+        element: <ProjectKanbanPage />,
+      },
+    ],
   },
   {
     path: RouterPath.login,

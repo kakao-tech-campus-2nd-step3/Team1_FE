@@ -49,16 +49,19 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           <Text fontSize="20px" fontWeight="bold">
             Menu
           </Text>
+
           <Flex direction="column">
-            <Text mt={2} mb={2}>
-              프로젝트 홈
-            </Text>
-            <Text mt={2} mb={2}>
-              진행도
-            </Text>
-            <Text mt={2} mb={2}>
-              일정 관리
-            </Text>
+            {/* TODO: 실제 프로젝트id를 동적으로 받아와야 함 */}
+            <Link to="/projects/:id">
+              <Text mt={2} mb={2}>
+                프로젝트 홈
+              </Text>
+            </Link>
+            <Link to="/projects/:id/kanban">
+              <Text mt={2} mb={2}>
+                칸반 보드
+              </Text>
+            </Link>
           </Flex>
         </Stack>
 
