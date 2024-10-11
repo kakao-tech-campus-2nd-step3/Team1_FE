@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { MoreVertical } from "lucide-react";
-import React from "react";
 
 type Props = {
   title: string;
   imageSrc?: string;
-} & React.HTMLAttributes<HTMLDivElement>;
+  width?: number | string;
+  height?: number | string;
+};
 
 export const ProjectCard = ({ title, imageSrc, ...rest }: Props) => (
   <Wrapper {...rest}>
