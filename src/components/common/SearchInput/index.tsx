@@ -4,18 +4,15 @@ import styled from "@emotion/styled";
 import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 
-// API 응답 타입 정의
 interface JoinResponse {
   projectId: number;
   guestId: number;
 }
 
-// Props 타입 정의
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onJoinSuccess?: (projectId: number, guestId: number) => void;
 }
 
-// API 호출 함수
 async function joinProject(code: string): Promise<JoinResponse> {
   const response = await axios.get<JoinResponse>(`/api/auth/join`, {
     params: { code }
