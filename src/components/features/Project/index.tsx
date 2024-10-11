@@ -13,7 +13,7 @@ export const Project = () => {
   const onClose = () => setIsOpen(false);
 
   return (
-    <>
+    <Box>
       <Sidebar isOpen={isOpen} onClose={onClose} />
 
       {!isOpen && (
@@ -58,7 +58,7 @@ export const Project = () => {
           </Stack>
         </Container>
       </Box>
-    </>
+    </Box>
   );
 };
 
