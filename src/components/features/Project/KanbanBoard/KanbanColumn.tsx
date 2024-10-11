@@ -12,24 +12,14 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-import { KanbanTask } from './KanbanTask';
+import type { TaskStatus, TaskType } from '@/types/index';
 
-interface Task {
-  id: number;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  ownerId: number;
-  progress: number;
-  status: '시작 전' | '진행 중' | '완료';
-  priority: 'high' | 'medium' | 'low';
-}
+import { KanbanTask } from './KanbanTask';
 
 interface ColumnProps {
   columns: {
-    status: string;
-    tasks: Task[];
+    status: TaskStatus;
+    tasks: TaskType[];
   };
 }
 
@@ -47,7 +37,7 @@ export const KanbanColumn = ({ columns }: ColumnProps) => {
               borderRadius="10px"
               fontSize="16px"
             >
-              {columns.status}
+              {statusLabels[columns.status]}
             </Badge>
           </Flex>
         </CardHeader>
@@ -77,15 +67,18 @@ export const KanbanColumn = ({ columns }: ColumnProps) => {
   );
 };
 
-const getStatusBadgeColor = (status: string): string => {
-  switch (status) {
-    case '대기 중':
-      return '#D9D9D9';
-    case '진행 중':
-      return '#D3E5EF';
-    case '완료':
-      return '#DBEDDB';
-    default:
-      return '#D9D9D9';
-  }
+const statusLabels: Record<TaskStatus, string> = {
+  NOT_STARTED: '시작 전',
+  IN_PROGRESS: '진행 중',
+  COMPLETED: '완료',
+};
+
+const statusBadgeColor: Record<TaskStatus, string> = {
+  NOT_STARTED: '#D9D9D9',
+  IN_PROGRESS: '#D3E5EF',
+  COMPLETED: '#DBEDDB',
+};
+
+const getStatusBadgeColor = (status: TaskStatus): string => {
+  return statusBadgeColor[status] || '#D9D9D9';
 };

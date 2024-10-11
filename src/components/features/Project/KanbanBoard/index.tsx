@@ -16,27 +16,17 @@ import {
 } from '@dnd-kit/sortable';
 import { useState } from 'react';
 
+import type { TaskStatus, TaskType } from '@/types/index';
+
 import { KanbanColumn } from './KanbanColumn';
 
-interface Task {
-  id: number;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  ownerId: number;
-  progress: number;
-  status: '시작 전' | '진행 중' | '완료';
-  priority: 'high' | 'medium' | 'low';
-}
-
 interface Column {
-  status: string;
-  tasks: Task[];
+  status: TaskStatus;
+  tasks: TaskType[];
 }
 
 export const KanbanBoard = () => {
-  const [tasks, setTasks] = useState<Task[]>([
+  const [tasks, setTasks] = useState<TaskType[]>([
     {
       id: 1,
       name: '작업 1',
@@ -45,8 +35,8 @@ export const KanbanBoard = () => {
       endDate: '2024-10-15T17:00:00Z',
       ownerId: 101,
       progress: 5,
-      status: '진행 중',
-      priority: 'high',
+      status: 'NOT_STARTED',
+      priority: 'HIGH',
     },
     {
       id: 2,
@@ -56,8 +46,8 @@ export const KanbanBoard = () => {
       endDate: '2024-10-16T17:00:00Z',
       ownerId: 102,
       progress: 3,
-      status: '진행 중',
-      priority: 'medium',
+      status: 'IN_PROGRESS',
+      priority: 'MEDIUM',
     },
     {
       id: 3,
@@ -67,8 +57,8 @@ export const KanbanBoard = () => {
       endDate: '2024-10-17T17:00:00Z',
       ownerId: 103,
       progress: 0,
-      status: '시작 전',
-      priority: 'low',
+      status: 'NOT_STARTED',
+      priority: 'LOW',
     },
     {
       id: 4,
@@ -78,8 +68,8 @@ export const KanbanBoard = () => {
       endDate: '2024-10-18T17:00:00Z',
       ownerId: 104,
       progress: 50,
-      status: '진행 중',
-      priority: 'medium',
+      status: 'IN_PROGRESS',
+      priority: 'MEDIUM',
     },
     {
       id: 5,
@@ -89,8 +79,8 @@ export const KanbanBoard = () => {
       endDate: '2024-10-19T17:00:00Z',
       ownerId: 105,
       progress: 75,
-      status: '진행 중',
-      priority: 'high',
+      status: 'IN_PROGRESS',
+      priority: 'HIGH',
     },
     {
       id: 6,
@@ -100,8 +90,8 @@ export const KanbanBoard = () => {
       endDate: '2024-10-20T17:00:00Z',
       ownerId: 106,
       progress: 100,
-      status: '완료',
-      priority: 'low',
+      status: 'COMPLETED',
+      priority: 'LOW',
     },
     {
       id: 7,
@@ -111,23 +101,23 @@ export const KanbanBoard = () => {
       endDate: '2024-10-21T17:00:00Z',
       ownerId: 107,
       progress: 100,
-      status: '완료',
-      priority: 'medium',
+      status: 'COMPLETED',
+      priority: 'MEDIUM',
     },
   ]);
 
   const columns: Column[] = [
     {
-      status: '시작 전',
-      tasks: tasks.filter((task) => task.status === '시작 전'),
+      status: 'NOT_STARTED',
+      tasks: tasks.filter((task) => task.status === 'NOT_STARTED'),
     },
     {
-      status: '진행 중',
-      tasks: tasks.filter((task) => task.status === '진행 중'),
+      status: 'IN_PROGRESS',
+      tasks: tasks.filter((task) => task.status === 'IN_PROGRESS'),
     },
     {
-      status: '완료',
-      tasks: tasks.filter((task) => task.status === '완료'),
+      status: 'COMPLETED',
+      tasks: tasks.filter((task) => task.status === 'COMPLETED'),
     },
   ];
 
