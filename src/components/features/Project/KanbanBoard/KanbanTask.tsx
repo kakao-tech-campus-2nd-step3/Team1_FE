@@ -6,9 +6,9 @@ import {
   Flex,
   Heading,
   Text,
-} from '@chakra-ui/react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+} from "@chakra-ui/react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface TaskProps {
   task: {
@@ -19,8 +19,8 @@ interface TaskProps {
     endDate: string;
     ownerId: number;
     progress: number;
-    status: '시작 전' | '진행 중' | '완료';
-    priority: 'high' | 'medium' | 'low';
+    status: "시작 전" | "진행 중" | "완료";
+    priority: "high" | "medium" | "low";
   };
 }
 
@@ -31,7 +31,7 @@ export const KanbanTask = ({ task }: TaskProps) => {
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
-    touchAction: 'none',
+    touchAction: "none",
   };
   return (
     <Card
@@ -74,13 +74,13 @@ export const KanbanTask = ({ task }: TaskProps) => {
 
 const getBadgeColor = (importance: string): string => {
   switch (importance) {
-    case 'high':
-      return '#FEC4B1';
-    case 'medium':
-      return '#FEEBB5';
-    case 'low':
-      return '#ECFAE9';
+    case "high":
+      return "#FEC4B1";
+    case "medium":
+      return "#FEEBB5";
+    case "low":
+      return "#ECFAE9";
     default:
-      return '#D9D9D9';
+      return "#D9D9D9";
   }
 };

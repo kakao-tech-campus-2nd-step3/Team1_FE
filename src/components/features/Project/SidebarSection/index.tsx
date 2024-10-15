@@ -1,8 +1,8 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, Stack, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-import { UserProfile } from './UserProfile';
+import { UserProfile } from "./UserProfile";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -18,7 +18,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       p={4}
       boxShadow="lg"
       transition="margin-left 0.3s ease, opacity 0.3s ease"
-      marginLeft={isOpen ? '0' : '-250px'}
+      marginLeft={isOpen ? "0" : "-250px"}
       opacity={isOpen ? 1 : 0}
       position="fixed"
       zIndex={10}
@@ -34,7 +34,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           onClick={onClose}
           borderRadius="full"
           backgroundColor="transparent"
-          _hover={{ backgroundColor: 'gray.200' }}
+          _hover={{ backgroundColor: "gray.200" }}
         >
           <ChevronLeftIcon boxSize={5} />
         </Button>

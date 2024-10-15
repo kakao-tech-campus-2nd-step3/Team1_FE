@@ -1,10 +1,10 @@
-import { HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Button, Container, Flex, Stack, Text } from '@chakra-ui/react';
-import { useState } from 'react';
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { Box, Button, Container, Flex, Stack, Text } from "@chakra-ui/react";
+import { useState } from "react";
 
-import { KanbanBoard } from './KanbanBoard';
-import { ProgressAccordion } from './ProgressAccordion';
-import { Sidebar } from './SidebarSection/index';
+import { KanbanBoard } from "./KanbanBoard";
+import { ProgressAccordion } from "./ProgressAccordion";
+import { Sidebar } from "./SidebarSection/index";
 
 export const Project = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -21,7 +21,7 @@ export const Project = () => {
           onClick={onOpen}
           borderRadius="full"
           backgroundColor="transparent"
-          _hover={{ backgroundColor: 'gray.100' }}
+          _hover={{ backgroundColor: "gray.100" }}
           margin={3}
           zIndex={1}
         >
@@ -30,7 +30,7 @@ export const Project = () => {
       )}
 
       <Box
-        marginLeft={isOpen ? '250px' : '0'}
+        marginLeft={isOpen ? "250px" : "0"}
         transition="margin-left 0.3s ease"
         p={4}
         flex="1"
@@ -63,10 +63,10 @@ export const Project = () => {
 };
 
 const buttonStyle = {
-  size: 'lg',
+  size: "lg",
   px: 8,
   py: 4,
-  height: 'auto',
-  backgroundColor: '#95A4FC',
-  color: 'white',
+  height: "auto",
+  backgroundColor: "#95A4FC",
+  color: "white",
 };
