@@ -1,3 +1,5 @@
 import { setupWorker } from 'msw';
 
-export const worker = setupWorker();
+import { handlers } from '../api/hooks/teamProgress.mock';
+
+export const worker = setupWorker(...handlers);

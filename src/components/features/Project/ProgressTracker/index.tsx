@@ -8,67 +8,23 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import type { Role } from '@/types/index';
-
-const mockTeamProgress = [
-  {
-    teamMember: {
-      id: 101,
-      name: '춘식이',
-      role: 'developer' as Role,
-      imageURL: 'https://via.placeholder.com/40',
-    },
-    progress: 3,
-    activeTasks: [
-      {
-        id: 1,
-        name: '진행 중인 태스크 1',
-        progress: 30,
-        description: '설명',
-        startDate: '2024-10-01T09:00:00Z',
-        endDate: '2024-10-10T17:00:00Z',
-      },
-    ],
-  },
-  {
-    teamMember: {
-      id: 102,
-      name: '라이언',
-      role: 'developer' as Role,
-      imageURL: 'https://via.placeholder.com/40',
-    },
-    progress: 90,
-    activeTasks: [
-      {
-        id: 2,
-        name: '진행 중인 태스크 2',
-        progress: 30,
-        description: '설명',
-        startDate: '2024-10-15T09:00:00Z',
-        endDate: '2024-10-20T17:00:00Z',
-      },
-    ],
-  },
-  {
-    teamMember: {
-      id: 103,
-      name: '가나다',
-      role: 'designer' as Role,
-      imageURL: 'https://via.placeholder.com/40',
-    },
-    progress: 30,
-    activeTasks: [],
-  },
-];
-
-const teamProgress = mockTeamProgress;
+import type { TeamProgressResponseData } from '../../../../api/hooks/useTeamProgress';
+import { useGetTeamProgress } from '../../../../api/hooks/useTeamProgress';
 
 const createFillAnimation = (progress: number) => keyframes`
   0% { width: 0%; }
   100% { width: ${progress}%; }
 `;
 
-export const ProgressTracker = () => {
+export const ProgressTracker = ({ projectId }: { projectId: number }) => {
+  const { data, isLoading } = useGetTeamProgress(projectId);
+
+  if (isLoading) return <Text>Loading...</Text>;
+
+  const teamProgressData: TeamProgressResponseData = data || {
+    teamProgress: [],
+  };
+
   return (
     <Box
       alignItems={'center'}
@@ -79,7 +35,7 @@ export const ProgressTracker = () => {
       overflow="hidden"
     >
       <Stack spacing={4} align="center" width="100%">
-        {teamProgress.map((member) => {
+        {teamProgressData.teamProgress.map((member) => {
           const fillAnimation = createFillAnimation(member.progress);
 
           return (
