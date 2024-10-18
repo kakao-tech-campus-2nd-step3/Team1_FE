@@ -1,4 +1,4 @@
-import { Avatar, Flex, Text } from '@chakra-ui/react';
+import { Avatar, Flex, Text } from "@chakra-ui/react";
 
 export const UserProfile = () => {
   return (

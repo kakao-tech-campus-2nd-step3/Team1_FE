@@ -8,15 +8,15 @@ import {
   Flex,
   Progress,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export const ProgressAccordion = () => {
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      borderRadius={'10px'}
-      border={'1px solid #D8DADC'}
+      borderRadius={"10px"}
+      border={"1px solid #D8DADC"}
       borderColor="#D8DADC"
     >
       <Accordion allowMultiple flex="1">

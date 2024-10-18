@@ -1,8 +1,8 @@
-import { Container, Stack } from '@chakra-ui/react';
+import { Container, Stack } from "@chakra-ui/react";
 
-import { KanbanBoard } from '../..//components/features/Project/KanbanBoard';
-import { Project } from '../../components/features/Project';
-import { ProgressAccordion } from '../../components/features/Project/ProgressAccordion';
+import { KanbanBoard } from "../..//components/features/Project/KanbanBoard";
+import { Project } from "../../components/features/Project";
+import { ProgressAccordion } from "../../components/features/Project/ProgressAccordion";
 
 export const ProjectKanbanPage = () => {
   return (

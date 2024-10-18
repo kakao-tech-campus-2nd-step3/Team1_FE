@@ -1,5 +1,5 @@
-import { Flex, SimpleGrid } from '@chakra-ui/react';
-import type { DragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
+import { Flex, SimpleGrid } from "@chakra-ui/react";
+import type { DragEndEvent, UniqueIdentifier } from "@dnd-kit/core";
 import {
   closestCorners,
   DndContext,
@@ -8,18 +8,18 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-} from '@dnd-kit/sortable';
-import { useMemo, useState } from 'react';
+} from "@dnd-kit/sortable";
+import { useMemo, useState } from "react";
 
-import type { TaskStatus, TaskType } from '@/types/index';
+import type { TaskStatus, TaskType } from "@/types/index";
 
-import { initialTasks } from './initialTask';
-import { KanbanColumn } from './KanbanColumn';
+import { initialTasks } from "./initialTask";
+import { KanbanColumn } from "./KanbanColumn";
 
 interface Column {
   id: string;
@@ -33,19 +33,19 @@ export const KanbanBoard = () => {
   const getColumns: Column[] = useMemo(() => {
     return [
       {
-        id: 'not_started',
-        status: 'NOT_STARTED',
-        tasks: tasks.filter((task) => task.status === 'NOT_STARTED'),
+        id: "not_started",
+        status: "NOT_STARTED",
+        tasks: tasks.filter((task) => task.status === "NOT_STARTED"),
       },
       {
-        id: 'in-progress',
-        status: 'IN_PROGRESS',
-        tasks: tasks.filter((task) => task.status === 'IN_PROGRESS'),
+        id: "in-progress",
+        status: "IN_PROGRESS",
+        tasks: tasks.filter((task) => task.status === "IN_PROGRESS"),
       },
       {
-        id: 'completed',
-        status: 'COMPLETED',
-        tasks: tasks.filter((task) => task.status === 'COMPLETED'),
+        id: "completed",
+        status: "COMPLETED",
+        tasks: tasks.filter((task) => task.status === "COMPLETED"),
       },
     ];
   }, [tasks]);
@@ -80,7 +80,7 @@ export const KanbanBoard = () => {
     useSensor(TouchSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   return (
@@ -92,8 +92,8 @@ export const KanbanBoard = () => {
       <Flex
         alignItems="center"
         justifyContent="space-between"
-        borderRadius={'10px'}
-        border={'1px solid #D8DADC'}
+        borderRadius={"10px"}
+        border={"1px solid #D8DADC"}
         borderColor="#D8DADC"
       >
         <SortableContext items={tasks.map((task) => task.id)}>

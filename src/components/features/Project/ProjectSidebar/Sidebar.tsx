@@ -1,8 +1,8 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, Stack, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
+import { Link, useParams } from "react-router-dom";
 
-import { UserProfile } from './UserProfile';
+import { UserProfile } from "./UserProfile";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -10,6 +10,8 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  const proejctId = useParams().id;
+
   return (
     <Box
       width="250px"
@@ -18,7 +20,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       p={4}
       boxShadow="lg"
       transition="margin-left 0.3s ease, opacity 0.3s ease"
-      marginLeft={isOpen ? '0' : '-250px'}
+      marginLeft={isOpen ? "0" : "-250px"}
       opacity={isOpen ? 1 : 0}
       position="fixed"
       zIndex={10}
@@ -34,7 +36,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           onClick={onClose}
           borderRadius="full"
           backgroundColor="transparent"
-          _hover={{ backgroundColor: 'gray.200' }}
+          _hover={{ backgroundColor: "gray.200" }}
         >
           <ChevronLeftIcon boxSize={5} />
         </Button>
@@ -51,13 +53,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </Text>
 
           <Flex direction="column">
-            {/* TODO: 실제 프로젝트id를 동적으로 받아와야 함 */}
-            <Link to="/projects/:id">
+            <Link to={`/projects/${proejctId}`}>
               <Text mt={2} mb={2}>
                 프로젝트 홈
               </Text>
             </Link>
-            <Link to="/projects/:id/kanban">
+            <Link to={`/projects/${proejctId}/kanban`}>
               <Text mt={2} mb={2}>
                 칸반 보드
               </Text>
