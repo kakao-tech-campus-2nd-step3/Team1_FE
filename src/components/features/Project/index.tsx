@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Text } from '@chakra-ui/react';
+import { Button, Container, Flex, Text } from "@chakra-ui/react";
 
 export const Project = () => {
   return (
@@ -20,10 +20,10 @@ export const Project = () => {
 };
 
 const buttonStyle = {
-  size: 'lg',
+  size: "lg",
   px: 8,
   py: 4,
-  height: 'auto',
-  backgroundColor: '#95A4FC',
-  color: 'white',
+  height: "auto",
+  backgroundColor: "#95A4FC",
+  color: "white",
 };

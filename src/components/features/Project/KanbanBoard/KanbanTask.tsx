@@ -6,11 +6,11 @@ import {
   Flex,
   Heading,
   Text,
-} from '@chakra-ui/react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+} from "@chakra-ui/react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-import type { TaskPriority, TaskType } from '@/types/index';
+import type { TaskPriority, TaskType } from "@/types/index";
 
 interface TaskProps {
   task: TaskType;
@@ -23,7 +23,7 @@ export const KanbanTask = ({ task }: TaskProps) => {
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
-    touchAction: 'none',
+    touchAction: "none",
   };
   return (
     <Card
@@ -65,11 +65,11 @@ export const KanbanTask = ({ task }: TaskProps) => {
 };
 
 const priorityBadgeColor: Record<TaskPriority, string> = {
-  HIGH: '#FEC4B1',
-  MEDIUM: '#FEEBB5',
-  LOW: '#ECFAE9',
+  HIGH: "#FEC4B1",
+  MEDIUM: "#FEEBB5",
+  LOW: "#ECFAE9",
 };
 
 const getPriorityBadgeColor = (priority: TaskPriority): string => {
-  return priorityBadgeColor[priority] || '#D9D9D9';
+  return priorityBadgeColor[priority] || "#D9D9D9";
 };

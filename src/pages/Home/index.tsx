@@ -19,8 +19,10 @@ export const HomePage: React.FC = () => {
           <Heading as="h2" size="xl" mb={100}>
             For Free!
           </Heading>
-          <Box maxW="md" mx="auto" >
-            <Text fontSize="2xl" mb={5}>팀의 멤버이신가요?</Text>
+          <Box maxW="md" mx="auto">
+            <Text fontSize="2xl" mb={5}>
+              팀의 멤버이신가요?
+            </Text>
             <SearchInput
               placeholder="# 참여코드로 시작"
               onJoinSuccess={handleJoinSuccess}

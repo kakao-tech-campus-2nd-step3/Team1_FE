@@ -1,4 +1,4 @@
-import { AddIcon } from '@chakra-ui/icons';
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Badge,
   Card,
@@ -6,15 +6,15 @@ import {
   CardHeader,
   Flex,
   IconButton,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 import {
   SortableContext,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 
-import type { TaskStatus, TaskType } from '@/types/index';
+import type { TaskStatus, TaskType } from "@/types/index";
 
-import { KanbanTask } from './KanbanTask';
+import { KanbanTask } from "./KanbanTask";
 
 interface ColumnProps {
   column: {
@@ -70,17 +70,17 @@ export const KanbanColumn = ({ column }: ColumnProps) => {
 };
 
 const statusLabels: Record<TaskStatus, string> = {
-  NOT_STARTED: '시작 전',
-  IN_PROGRESS: '진행 중',
-  COMPLETED: '완료',
+  NOT_STARTED: "시작 전",
+  IN_PROGRESS: "진행 중",
+  COMPLETED: "완료",
 };
 
 const statusBadgeColor: Record<TaskStatus, string> = {
-  NOT_STARTED: '#D9D9D9',
-  IN_PROGRESS: '#D3E5EF',
-  COMPLETED: '#DBEDDB',
+  NOT_STARTED: "#D9D9D9",
+  IN_PROGRESS: "#D3E5EF",
+  COMPLETED: "#DBEDDB",
 };
 
 const getStatusBadgeColor = (status: TaskStatus): string => {
-  return statusBadgeColor[status] || '#D9D9D9';
+  return statusBadgeColor[status] || "#D9D9D9";
 };
