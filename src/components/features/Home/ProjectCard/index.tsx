@@ -9,7 +9,12 @@ type Props = {
   height?: number | string;
 };
 
-export const ProjectCard: React.FC<Props> = ({ title, imageSrc, width, height }) => (
+export const ProjectCard: React.FC<Props> = ({
+  title,
+  imageSrc,
+  width,
+  height,
+}) => (
   <Wrapper width={width} height={height}>
     <ImageArea>
       {imageSrc ? <StyledImage src={imageSrc} alt="" /> : <PurpleBackground />}
@@ -23,9 +28,12 @@ export const ProjectCard: React.FC<Props> = ({ title, imageSrc, width, height })
   </Wrapper>
 );
 
-const Wrapper = styled.div<{ width?: number | string; height?: number | string }>`
-  width: ${props => props.width || "253px"};
-  height: ${props => props.height || "161px"};
+const Wrapper = styled.div<{
+  width?: number | string;
+  height?: number | string;
+}>`
+  width: ${(props) => props.width || "253px"};
+  height: ${(props) => props.height || "161px"};
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -46,7 +54,7 @@ const StyledImage = styled.img`
 const PurpleBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #9F7AEA;
+  background-color: #9f7aea;
 `;
 
 const SettingsButton = styled.button`
