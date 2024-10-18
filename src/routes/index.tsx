@@ -13,6 +13,7 @@ import { MemberDetailsPage } from "../pages/MemberDetails";
 import { ProjectPage } from "../pages/Project";
 import { ProjectListPage } from "../pages/ProjectList";
 import { SignupPage } from "../pages/Signup";
+import { PrivateRoute } from './components/PrivateRoute';
 import { RouterPath } from "./path";
 
 const router = createBrowserRouter([
@@ -26,7 +27,13 @@ const router = createBrowserRouter([
       },
       {
         path: RouterPath.projectList,
-        element: <ProjectListPage />,
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: RouterPath.projectList,
+            element: <ProjectListPage />,
+          }
+        ]
       },
       {
         path: RouterPath.joinProject,

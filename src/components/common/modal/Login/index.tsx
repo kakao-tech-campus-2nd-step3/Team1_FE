@@ -7,16 +7,39 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import styled from "@emotion/styled";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaApple } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { RiKakaoTalkFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../../../provider/Auth";
+import { RouterPath } from "../../../../routes/path";
 
 const IconWrapper = styled.span`
   margin-right: 1rem;
 `;
 
-export const LoginModal: React.FC = () => {
+export const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const { user, login } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      onClose();
+      navigate(RouterPath.projectList);
+    }
+  }, [user, navigate, onClose]);
+
+  const loginWithGoogle = () => {
+    console.log("Google login clicked");
+    login("user@example.com");
+  };
+
+  const appleKakaoLogin = () => {
+    alert("개발 예정입니다.");
+  };
+
   return (
     <>
       <ModalOverlay />
@@ -28,19 +51,19 @@ export const LoginModal: React.FC = () => {
         </ModalHeader>
         <ModalCloseButton />
         <VStack spacing={7} align="stretch">
-          <StyledButton>
+          <StyledButton onClick={loginWithGoogle}>
             <IconWrapper>
               <FcGoogle />
             </IconWrapper>
             Continue with Google
           </StyledButton>
-          <StyledButton>
+          <StyledButton onClick={appleKakaoLogin}>
             <IconWrapper>
               <FaApple />
             </IconWrapper>
             Continue with Apple
           </StyledButton>
-          <StyledButton>
+          <StyledButton onClick={appleKakaoLogin}>
             <IconWrapper>
               <RiKakaoTalkFill />
             </IconWrapper>
