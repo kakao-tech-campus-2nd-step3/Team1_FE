@@ -15,12 +15,15 @@ interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 async function joinProject(code: string): Promise<JoinResponse> {
   const response = await axios.get<JoinResponse>(`/api/auth/join`, {
-    params: { code }
+    params: { code },
   });
   return response.data;
 }
 
-export const SearchInput: React.FC<SearchInputProps> = ({ onJoinSuccess, ...props }) => {
+export const SearchInput: React.FC<SearchInputProps> = ({
+  onJoinSuccess,
+  ...props
+}) => {
   const [value, setValue] = useState("");
   const toast = useToast();
 
@@ -32,9 +35,10 @@ export const SearchInput: React.FC<SearchInputProps> = ({ onJoinSuccess, ...prop
       console.error("Error joining project:", error);
       toast({
         title: "프로젝트 참여 실패",
-        description: error instanceof AxiosError && error.response?.status === 400
-          ? "잘못된 코드입니다."
-          : "서버 오류가 발생했습니다.",
+        description:
+          error instanceof AxiosError && error.response?.status === 400
+            ? "잘못된 코드입니다."
+            : "서버 오류가 발생했습니다.",
         status: "error",
         duration: 3000,
         isClosable: true,

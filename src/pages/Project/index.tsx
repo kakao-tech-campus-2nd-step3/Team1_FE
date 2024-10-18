@@ -1,12 +1,11 @@
-import { Container, Stack } from '@chakra-ui/react';
+import { Container, Stack } from "@chakra-ui/react";
 
-import { ProgressTracker } from '../..//components/features/Project/ProgressTracker';
-import { Project } from '../../components/features/Project';
-import { ProgressAccordion } from '../../components/features/Project/ProgressAccordion';
+import { ProgressTracker } from "../..//components/features/Project/ProgressTracker";
+import { Project } from "../../components/features/Project";
+import { ProgressAccordion } from "../../components/features/Project/ProgressAccordion";
 
 export const ProjectPage = () => {
-  // TODO: 임시 -> 변경 필요
-  const projectId = parseInt('1');
+  const projectId = parseInt("1");
 
   return (
     <>

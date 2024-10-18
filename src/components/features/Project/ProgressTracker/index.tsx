@@ -6,10 +6,10 @@ import {
   Progress,
   Stack,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import type { TeamProgressResponseData } from '../../../../api/hooks/useTeamProgress';
-import { useGetTeamProgress } from '../../../../api/hooks/useTeamProgress';
+import type { TeamProgressResponseData } from "../../../../api/hooks/useTeamProgress";
+import { useGetTeamProgress } from "../../../../api/hooks/useTeamProgress";
 
 const createFillAnimation = (progress: number) => keyframes`
   0% { width: 0%; }
@@ -27,9 +27,9 @@ export const ProgressTracker = ({ projectId }: { projectId: number }) => {
 
   return (
     <Box
-      alignItems={'center'}
-      borderRadius={'10px'}
-      border={'1px solid #D8DADC'}
+      alignItems={"center"}
+      borderRadius={"10px"}
+      border={"1px solid #D8DADC"}
       borderColor="#D8DADC"
       p={8}
       overflow="hidden"
@@ -64,7 +64,7 @@ export const ProgressTracker = ({ projectId }: { projectId: number }) => {
                   height={9}
                   borderRadius="full"
                   sx={{
-                    '& > div': {
+                    "& > div": {
                       animation: `${fillAnimation} 2s ease-in-out forwards`,
                       width: `${member.progress}%`,
                       backgroundColor: `rgba(49, 130, 206, ${0.5 + member.progress / 200})`,
