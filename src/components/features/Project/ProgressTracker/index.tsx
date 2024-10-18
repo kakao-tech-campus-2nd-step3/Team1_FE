@@ -53,7 +53,7 @@ export const ProgressTracker = ({ projectId }: { projectId: number }) => {
                   src={member.teamMember.imageURL}
                   size="sm"
                 />
-                <Text fontWeight="bold" ml={4} width="80px">
+                <Text fontWeight="bold" ml={4} width="100px" align="center">
                   {member.teamMember.name}
                 </Text>
               </Flex>
@@ -61,13 +61,13 @@ export const ProgressTracker = ({ projectId }: { projectId: number }) => {
               <Box flex="1" position="relative" mx={4}>
                 <Progress
                   value={member.progress}
-                  colorScheme={'blue'}
                   height={9}
                   borderRadius="full"
                   sx={{
                     '& > div': {
                       animation: `${fillAnimation} 2s ease-in-out forwards`,
                       width: `${member.progress}%`,
+                      backgroundColor: `rgba(49, 130, 206, ${0.5 + member.progress / 200})`,
                     },
                   }}
                 />
@@ -101,7 +101,6 @@ export const ProgressTracker = ({ projectId }: { projectId: number }) => {
                   transform="translateY(-50%)"
                   fontWeight="bold"
                   color="black"
-                  overflow="hidden"
                   backgroundColor="rgba(255, 255, 255, 0.8)"
                   borderRadius="full"
                 >

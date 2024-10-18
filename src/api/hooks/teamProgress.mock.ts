@@ -46,7 +46,7 @@ const mockTeamProgressData = [
   {
     teamMember: {
       id: 103,
-      name: '가나다',
+      name: '가나다라마바사아자차카타파하',
       role: 'designer' as Role,
       imageURL: 'https://via.placeholder.com/40',
     },
