@@ -14,126 +14,46 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
+import type { TaskStatus, TaskType } from "@/types/index";
+
+import { initialTasks } from "./initialTask";
 import { KanbanColumn } from "./KanbanColumn";
 
-interface Task {
-  id: number;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  ownerId: number;
-  progress: number;
-  status: "시작 전" | "진행 중" | "완료";
-  priority: "high" | "medium" | "low";
-}
-
 interface Column {
-  status: string;
-  tasks: Task[];
+  id: string;
+  status: TaskStatus;
+  tasks: TaskType[];
 }
 
 export const KanbanBoard = () => {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      name: "작업 1",
-      description: "작업 1 설명",
-      startDate: "2024-10-01T09:00:00Z",
-      endDate: "2024-10-15T17:00:00Z",
-      ownerId: 101,
-      progress: 5,
-      status: "진행 중",
-      priority: "high",
-    },
-    {
-      id: 2,
-      name: "작업 2",
-      description: "작업 2 설명",
-      startDate: "2024-10-02T09:00:00Z",
-      endDate: "2024-10-16T17:00:00Z",
-      ownerId: 102,
-      progress: 3,
-      status: "진행 중",
-      priority: "medium",
-    },
-    {
-      id: 3,
-      name: "작업 3",
-      description: "작업 3 설명",
-      startDate: "2024-10-03T09:00:00Z",
-      endDate: "2024-10-17T17:00:00Z",
-      ownerId: 103,
-      progress: 0,
-      status: "시작 전",
-      priority: "low",
-    },
-    {
-      id: 4,
-      name: "작업 4",
-      description: "작업 4 설명",
-      startDate: "2024-10-04T09:00:00Z",
-      endDate: "2024-10-18T17:00:00Z",
-      ownerId: 104,
-      progress: 50,
-      status: "진행 중",
-      priority: "medium",
-    },
-    {
-      id: 5,
-      name: "작업 5",
-      description: "작업 5 설명",
-      startDate: "2024-10-05T09:00:00Z",
-      endDate: "2024-10-19T17:00:00Z",
-      ownerId: 105,
-      progress: 75,
-      status: "진행 중",
-      priority: "high",
-    },
-    {
-      id: 6,
-      name: "작업 6",
-      description: "작업 6 설명",
-      startDate: "2024-10-06T09:00:00Z",
-      endDate: "2024-10-20T17:00:00Z",
-      ownerId: 106,
-      progress: 100,
-      status: "완료",
-      priority: "low",
-    },
-    {
-      id: 7,
-      name: "작업 7",
-      description: "작업 7 설명",
-      startDate: "2024-10-07T09:00:00Z",
-      endDate: "2024-10-21T17:00:00Z",
-      ownerId: 107,
-      progress: 100,
-      status: "완료",
-      priority: "medium",
-    },
-  ]);
+  const [tasks, setTasks] = useState<TaskType[]>(initialTasks);
 
-  const columns: Column[] = [
-    {
-      status: "시작 전",
-      tasks: tasks.filter((task) => task.status === "시작 전"),
-    },
-    {
-      status: "진행 중",
-      tasks: tasks.filter((task) => task.status === "진행 중"),
-    },
-    {
-      status: "완료",
-      tasks: tasks.filter((task) => task.status === "완료"),
-    },
-  ];
+  const getColumns: Column[] = useMemo(() => {
+    return [
+      {
+        id: "not_started",
+        status: "NOT_STARTED",
+        tasks: tasks.filter((task) => task.status === "NOT_STARTED"),
+      },
+      {
+        id: "in-progress",
+        status: "IN_PROGRESS",
+        tasks: tasks.filter((task) => task.status === "IN_PROGRESS"),
+      },
+      {
+        id: "completed",
+        status: "COMPLETED",
+        tasks: tasks.filter((task) => task.status === "COMPLETED"),
+      },
+    ];
+  }, [tasks]);
 
   const getTaskPos = (id: UniqueIdentifier) =>
     tasks.findIndex((task) => task.id === id);
 
+  console.log(getColumns);
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -178,8 +98,8 @@ export const KanbanBoard = () => {
       >
         <SortableContext items={tasks.map((task) => task.id)}>
           <SimpleGrid columns={3} spacing={4} width="100%" p={4}>
-            {columns.map((column) => (
-              <KanbanColumn key={column.status} columns={column} />
+            {getColumns.map((column) => (
+              <KanbanColumn key={column.id} column={column} />
             ))}
           </SimpleGrid>
         </SortableContext>

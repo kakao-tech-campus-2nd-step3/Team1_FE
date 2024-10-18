@@ -6,14 +6,16 @@ import {
 } from "react-router-dom";
 
 import { Layout } from "../components/features/Layout";
+import { ProjectSidebar } from "../components/features/Project/ProjectSidebar";
 import { HomePage } from "../pages/Home";
 import { JoinProjectPage } from "../pages/JoinProject";
 import { LoginPage } from "../pages/Login";
 import { MemberDetailsPage } from "../pages/MemberDetails";
 import { ProjectPage } from "../pages/Project";
+import { ProjectKanbanPage } from "../pages/ProjectKanban";
 import { ProjectListPage } from "../pages/ProjectList";
 import { SignupPage } from "../pages/Signup";
-import { PrivateRoute } from './components/PrivateRoute';
+import { PrivateRoute } from "./components/PrivateRoute";
 import { RouterPath } from "./path";
 
 const router = createBrowserRouter([
@@ -32,8 +34,8 @@ const router = createBrowserRouter([
           {
             path: RouterPath.projectList,
             element: <ProjectListPage />,
-          }
-        ]
+          },
+        ],
       },
       {
         path: RouterPath.joinProject,
@@ -47,7 +49,17 @@ const router = createBrowserRouter([
   },
   {
     path: RouterPath.project,
-    element: <ProjectPage />,
+    element: <ProjectSidebar />,
+    children: [
+      {
+        index: true,
+        element: <ProjectPage />,
+      },
+      {
+        path: RouterPath.projectKanban,
+        element: <ProjectKanbanPage />,
+      },
+    ],
   },
   {
     path: RouterPath.login,

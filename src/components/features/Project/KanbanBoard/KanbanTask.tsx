@@ -10,18 +10,10 @@ import {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+import type { TaskPriority, TaskType } from "@/types/index";
+
 interface TaskProps {
-  task: {
-    id: number;
-    name: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    ownerId: number;
-    progress: number;
-    status: "시작 전" | "진행 중" | "완료";
-    priority: "high" | "medium" | "low";
-  };
+  task: TaskType;
 }
 
 export const KanbanTask = ({ task }: TaskProps) => {
@@ -48,7 +40,7 @@ export const KanbanTask = ({ task }: TaskProps) => {
       <CardHeader pb={1}>
         <Flex direction="column" gap={2}>
           <Badge
-            bg={getBadgeColor(task.priority)}
+            bg={getPriorityBadgeColor(task.priority)}
             p="1"
             maxW="65px"
             textAlign="center"
@@ -72,15 +64,12 @@ export const KanbanTask = ({ task }: TaskProps) => {
   );
 };
 
-const getBadgeColor = (importance: string): string => {
-  switch (importance) {
-    case "high":
-      return "#FEC4B1";
-    case "medium":
-      return "#FEEBB5";
-    case "low":
-      return "#ECFAE9";
-    default:
-      return "#D9D9D9";
-  }
+const priorityBadgeColor: Record<TaskPriority, string> = {
+  HIGH: "#FEC4B1",
+  MEDIUM: "#FEEBB5",
+  LOW: "#ECFAE9",
+};
+
+const getPriorityBadgeColor = (priority: TaskPriority): string => {
+  return priorityBadgeColor[priority] || "#D9D9D9";
 };

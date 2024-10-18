@@ -1,6 +1,6 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { UserProfile } from "./UserProfile";
 
@@ -10,6 +10,8 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+  const proejctId = useParams().id;
+
   return (
     <Box
       width="250px"
@@ -49,16 +51,18 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           <Text fontSize="20px" fontWeight="bold">
             Menu
           </Text>
+
           <Flex direction="column">
-            <Text mt={2} mb={2}>
-              프로젝트 홈
-            </Text>
-            <Text mt={2} mb={2}>
-              진행도
-            </Text>
-            <Text mt={2} mb={2}>
-              일정 관리
-            </Text>
+            <Link to={`/projects/${proejctId}`}>
+              <Text mt={2} mb={2}>
+                프로젝트 홈
+              </Text>
+            </Link>
+            <Link to={`/projects/${proejctId}/kanban`}>
+              <Text mt={2} mb={2}>
+                칸반 보드
+              </Text>
+            </Link>
           </Flex>
         </Stack>
 

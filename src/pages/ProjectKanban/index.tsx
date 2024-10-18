@@ -1,19 +1,17 @@
 import { Container, Stack } from "@chakra-ui/react";
 
-import { ProgressTracker } from "../..//components/features/Project/ProgressTracker";
+import { KanbanBoard } from "../..//components/features/Project/KanbanBoard";
 import { Project } from "../../components/features/Project";
 import { ProgressAccordion } from "../../components/features/Project/ProgressAccordion";
 
-export const ProjectPage = () => {
-  const projectId = parseInt("1");
-
+export const ProjectKanbanPage = () => {
   return (
     <>
       <Project />
       <Container maxW="container.xl" padding={6}>
         <Stack spacing={6}>
           <ProgressAccordion />
-          <ProgressTracker projectId={projectId} />
+          <KanbanBoard />
         </Stack>
       </Container>
     </>

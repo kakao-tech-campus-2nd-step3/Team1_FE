@@ -12,54 +12,46 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
+import type { TaskStatus, TaskType } from "@/types/index";
+
 import { KanbanTask } from "./KanbanTask";
 
-interface Task {
-  id: number;
-  name: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-  ownerId: number;
-  progress: number;
-  status: "시작 전" | "진행 중" | "완료";
-  priority: "high" | "medium" | "low";
-}
-
 interface ColumnProps {
-  columns: {
-    status: string;
-    tasks: Task[];
+  column: {
+    id: string;
+    status: TaskStatus;
+    tasks: TaskType[];
   };
 }
 
-export const KanbanColumn = ({ columns }: ColumnProps) => {
+export const KanbanColumn = ({ column }: ColumnProps) => {
   return (
-    <Card>
+    <Card key={column.id}>
       <Flex direction="column">
         <CardHeader>
           <Flex>
             <Badge
-              bg={getStatusBadgeColor(columns.status)}
+              bg={getStatusBadgeColor(column.status)}
               p="1"
               width="90px"
               textAlign="center"
               borderRadius="10px"
               fontSize="16px"
             >
-              {columns.status}
+              {statusLabels[column.status]}
             </Badge>
           </Flex>
         </CardHeader>
         <CardBody>
           <SortableContext
-            items={columns.tasks.map((task) => task.id)}
+            items={column.tasks.map((task) => task.id)}
             strategy={verticalListSortingStrategy}
           >
-            {columns.tasks.map((task) => (
+            {column.tasks.map((task) => (
               <KanbanTask key={task.id} task={task} />
             ))}
           </SortableContext>
+
           <Flex justifyContent="center">
             <IconButton
               isRound={true}
@@ -77,15 +69,18 @@ export const KanbanColumn = ({ columns }: ColumnProps) => {
   );
 };
 
-const getStatusBadgeColor = (status: string): string => {
-  switch (status) {
-    case "대기 중":
-      return "#D9D9D9";
-    case "진행 중":
-      return "#D3E5EF";
-    case "완료":
-      return "#DBEDDB";
-    default:
-      return "#D9D9D9";
-  }
+const statusLabels: Record<TaskStatus, string> = {
+  NOT_STARTED: "시작 전",
+  IN_PROGRESS: "진행 중",
+  COMPLETED: "완료",
+};
+
+const statusBadgeColor: Record<TaskStatus, string> = {
+  NOT_STARTED: "#D9D9D9",
+  IN_PROGRESS: "#D3E5EF",
+  COMPLETED: "#DBEDDB",
+};
+
+const getStatusBadgeColor = (status: TaskStatus): string => {
+  return statusBadgeColor[status] || "#D9D9D9";
 };
