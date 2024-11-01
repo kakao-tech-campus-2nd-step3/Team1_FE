@@ -10,7 +10,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-export const ProgressAccordion = () => {
+import type { ProjectDetail } from "@/api/generated/data-contracts";
+
+export const ProgressAccordion = (props: { projectDetail: ProjectDetail }) => {
+  const { projectDetail } = props;
+
   return (
     <Flex
       alignItems="center"
@@ -25,7 +29,7 @@ export const ProgressAccordion = () => {
             <AccordionIcon boxSize={10} />
             <Box minW="100px" flex="1">
               <Text fontSize="xl" fontWeight="bold">
-                프로젝트 이름
+                {projectDetail.name}
               </Text>
             </Box>
             <Progress
@@ -39,7 +43,7 @@ export const ProgressAccordion = () => {
             />
           </AccordionButton>
 
-          <AccordionPanel pb={4}>내용</AccordionPanel>
+          <AccordionPanel pb={4}>{projectDetail.name} 관련 내용</AccordionPanel>
         </AccordionItem>
       </Accordion>
     </Flex>

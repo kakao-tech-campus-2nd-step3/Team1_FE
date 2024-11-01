@@ -55,11 +55,11 @@ const mockTeamProgressData = [
   },
 ];
 
-export const handlers = [
+export const teamProgressMockHandler = [
   rest.get(getTeamProgressPath(1), (_, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json({ teamProgress: mockTeamProgressData }),
+      ctx.json({ teamProgress: mockTeamProgressData })
     );
   }),
 ];

@@ -1,5 +1,11 @@
 import { setupWorker } from "msw";
 
-import { handlers } from "../api/hooks/teamProgress.mock";
+import { projectMockHandler } from "../api/hooks/projectDetail.mock";
+import { teamProgressMockHandler } from "../api/hooks/teamProgress.mock";
+import { userMockHandler } from "../api/hooks/userDetail.mock";
 
-export const worker = setupWorker(...handlers);
+export const worker = setupWorker(
+  ...teamProgressMockHandler,
+  ...projectMockHandler,
+  ...userMockHandler
+);

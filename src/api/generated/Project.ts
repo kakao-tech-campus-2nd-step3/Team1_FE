@@ -10,18 +10,15 @@
  */
 
 import {
-  Create,
   CreateMember,
   CreateMemberData,
   CreateOptionData,
   CreateProjectData,
   CreateTaskData,
-  CreateTestData,
   DeleteMemberData,
   DeleteOptionData,
   DeleteProjectData,
   DeleteTaskData,
-  DeleteUserData,
   GenerateInviteLinkData,
   GetList,
   GetMemberData,
@@ -35,14 +32,8 @@ import {
   GetProjectPeriodData,
   GetTaskData,
   GetTaskListData,
-  GetTestData,
-  GetTestListData,
-  GetUserData,
   InviteMemberToProjectData,
   InviteRequestDTO,
-  MemberCodeCreate1Data,
-  MemberCodeCreateData,
-  MemberCodeJoinData,
   OptionCreate,
   ProjectCreate,
   ProjectUpdate,
@@ -54,67 +45,10 @@ import {
   UpdateOptionData,
   UpdateProjectData,
   UpdateTaskData,
-  UpdateUserData,
-  UserUpdate,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Api<
-  SecurityDataType = unknown,
-> extends HttpClient<SecurityDataType> {
-  /**
-   * No description
-   *
-   * @tags 유저 구현
-   * @name GetUser
-   * @summary 유저 정보 조회
-   * @request GET:/api/user
-   * @secure
-   * @response `200` `GetUserData` OK
-   */
-  getUser = (params: RequestParams = {}) =>
-    this.request<GetUserData, any>({
-      path: `/api/user`,
-      method: "GET",
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 유저 구현
-   * @name UpdateUser
-   * @summary 유저 정보 수정
-   * @request PUT:/api/user
-   * @secure
-   * @response `200` `UpdateUserData` OK
-   */
-  updateUser = (data: UserUpdate, params: RequestParams = {}) =>
-    this.request<UpdateUserData, any>({
-      path: `/api/user`,
-      method: "PUT",
-      body: data,
-      secure: true,
-      type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 유저 구현
-   * @name DeleteUser
-   * @summary 유저 정보 삭제
-   * @request DELETE:/api/user
-   * @secure
-   * @response `200` `DeleteUserData` OK
-   */
-  deleteUser = (params: RequestParams = {}) =>
-    this.request<DeleteUserData, any>({
-      path: `/api/user`,
-      method: "DELETE",
-      secure: true,
-      ...params,
-    });
+export class Project<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
@@ -125,11 +59,7 @@ export class Api<
    * @secure
    * @response `200` `GetMemberData` OK
    */
-  getMember = (
-    projectId: number,
-    memberId: number,
-    params: RequestParams = {},
-  ) =>
+  getMember = (projectId: number, memberId: number, params: RequestParams = {}) =>
     this.request<GetMemberData, any>({
       path: `/api/project/${projectId}/member/${memberId}`,
       method: "GET",
@@ -146,12 +76,7 @@ export class Api<
    * @secure
    * @response `200` `UpdateMemberData` OK
    */
-  updateMember = (
-    projectId: number,
-    memberId: number,
-    data: UpdateMember,
-    params: RequestParams = {},
-  ) =>
+  updateMember = (projectId: number, memberId: number, data: UpdateMember, params: RequestParams = {}) =>
     this.request<UpdateMemberData, any>({
       path: `/api/project/${projectId}/member/${memberId}`,
       method: "PUT",
@@ -170,11 +95,7 @@ export class Api<
    * @secure
    * @response `200` `DeleteMemberData` OK
    */
-  deleteMember = (
-    projectId: number,
-    memberId: number,
-    params: RequestParams = {},
-  ) =>
+  deleteMember = (projectId: number, memberId: number, params: RequestParams = {}) =>
     this.request<DeleteMemberData, any>({
       path: `/api/project/${projectId}/member/${memberId}`,
       method: "DELETE",
@@ -208,11 +129,7 @@ export class Api<
    * @secure
    * @response `200` `UpdateProjectData` OK
    */
-  updateProject = (
-    projectId: number,
-    data: ProjectUpdate,
-    params: RequestParams = {},
-  ) =>
+  updateProject = (projectId: number, data: ProjectUpdate, params: RequestParams = {}) =>
     this.request<UpdateProjectData, any>({
       path: `/api/project/${projectId}`,
       method: "PUT",
@@ -318,11 +235,7 @@ export class Api<
    * @secure
    * @response `200` `UpdateOptionData` OK
    */
-  updateOption = (
-    optionId: number,
-    data: UpdateOption,
-    params: RequestParams = {},
-  ) =>
+  updateOption = (optionId: number, data: UpdateOption, params: RequestParams = {}) =>
     this.request<UpdateOptionData, any>({
       path: `/api/project/option/${optionId}`,
       method: "PUT",
@@ -345,65 +258,6 @@ export class Api<
     this.request<DeleteOptionData, any>({
       path: `/api/project/option/${optionId}`,
       method: "DELETE",
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 참조
-   * @name GetTestList
-   * @summary 조회 참조
-   * @request GET:/api/test
-   * @secure
-   * @response `200` `GetTestListData` OK
-   */
-  getTestList = (
-    query: {
-      param: GetList;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<GetTestListData, any>({
-      path: `/api/test`,
-      method: "GET",
-      query: query,
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 참조
-   * @name CreateTest
-   * @summary 생성 참조
-   * @request POST:/api/test
-   * @secure
-   * @response `200` `CreateTestData` OK
-   */
-  createTest = (data: Create, params: RequestParams = {}) =>
-    this.request<CreateTestData, any>({
-      path: `/api/test`,
-      method: "POST",
-      body: data,
-      secure: true,
-      type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * @description id1번 유저의 토큰 생성(테스트 외 사용금지)
-   *
-   * @tags 참조
-   * @name MemberCodeCreate
-   * @summary 테스트용 토큰 생성
-   * @request POST:/api/test/userToken/{userId}
-   * @secure
-   * @response `200` `MemberCodeCreateData` OK
-   */
-  memberCodeCreate = (userId: number, params: RequestParams = {}) =>
-    this.request<MemberCodeCreateData, any>({
-      path: `/api/test/userToken/${userId}`,
-      method: "POST",
       secure: true,
       ...params,
     });
@@ -483,11 +337,7 @@ export class Api<
    * @secure
    * @response `200` `CreateMemberData` OK
    */
-  createMember = (
-    projectId: string,
-    data: CreateMember,
-    params: RequestParams = {},
-  ) =>
+  createMember = (projectId: string, data: CreateMember, params: RequestParams = {}) =>
     this.request<CreateMemberData, any>({
       path: `/api/project/${projectId}/member`,
       method: "POST",
@@ -530,11 +380,7 @@ export class Api<
    * @secure
    * @response `200` `CreateTaskData` OK
    */
-  createTask = (
-    projectId: number,
-    data: TaskCreate,
-    params: RequestParams = {},
-  ) =>
+  createTask = (projectId: number, data: TaskCreate, params: RequestParams = {}) =>
     this.request<CreateTaskData, any>({
       path: `/api/project/${projectId}/task`,
       method: "POST",
@@ -553,11 +399,7 @@ export class Api<
    * @secure
    * @response `200` `GenerateInviteLinkData` OK
    */
-  generateInviteLink = (
-    projectId: number,
-    userId: number,
-    params: RequestParams = {},
-  ) =>
+  generateInviteLink = (projectId: number, userId: number, params: RequestParams = {}) =>
     this.request<GenerateInviteLinkData, any>({
       path: `/api/project/${projectId}/invite-link/${userId}`,
       method: "POST",
@@ -616,33 +458,13 @@ export class Api<
    * @secure
    * @response `200` `InviteMemberToProjectData` OK
    */
-  inviteMemberToProject = (
-    data: InviteRequestDTO,
-    params: RequestParams = {},
-  ) =>
+  inviteMemberToProject = (data: InviteRequestDTO, params: RequestParams = {}) =>
     this.request<InviteMemberToProjectData, any>({
       path: `/api/project/invite`,
       method: "POST",
       body: data,
       secure: true,
       type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 참조
-   * @name GetTest
-   * @summary 조회 참조
-   * @request GET:/api/test/{id}
-   * @secure
-   * @response `200` `GetTestData` OK
-   */
-  getTest = (id: number, params: RequestParams = {}) =>
-    this.request<GetTestData, any>({
-      path: `/api/test/${id}`,
-      method: "GET",
-      secure: true,
       ...params,
     });
   /**
@@ -680,52 +502,6 @@ export class Api<
   ) =>
     this.request<GetProjectPeriodData, any>({
       path: `/api/project/periods`,
-      method: "GET",
-      query: query,
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 인증기능 구현
-   * @name MemberCodeJoin
-   * @summary 인증 코드로 멤버 토큰 반환
-   * @request GET:/api/auth/memberCode
-   * @secure
-   * @response `200` `MemberCodeJoinData` OK
-   */
-  memberCodeJoin = (
-    query: {
-      memberCode: string;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<MemberCodeJoinData, any>({
-      path: `/api/auth/memberCode`,
-      method: "GET",
-      query: query,
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 인증기능 구현
-   * @name MemberCodeCreate1
-   * @summary 인증 코드 생성(테스트용)
-   * @request GET:/api/auth/memberCode/create
-   * @secure
-   * @response `200` `MemberCodeCreate1Data` OK
-   */
-  memberCodeCreate1 = (
-    query: {
-      memberCode: string;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<MemberCodeCreate1Data, any>({
-      path: `/api/auth/memberCode/create`,
       method: "GET",
       query: query,
       secure: true,

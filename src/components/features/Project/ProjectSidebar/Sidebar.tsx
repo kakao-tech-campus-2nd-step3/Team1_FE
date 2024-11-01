@@ -10,7 +10,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  const proejctId = useParams().id;
+  const projectId = useParams().id;
 
   return (
     <Box
@@ -53,12 +53,12 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </Text>
 
           <Flex direction="column">
-            <Link to={`/projects/${proejctId}`}>
+            <Link to={`/projects/${projectId}`}>
               <Text mt={2} mb={2}>
                 프로젝트 홈
               </Text>
             </Link>
-            <Link to={`/projects/${proejctId}/kanban`}>
+            <Link to={`/projects/${projectId}/kanban`}>
               <Text mt={2} mb={2}>
                 칸반 보드
               </Text>
