@@ -2,7 +2,7 @@ import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 
 import { Image } from "../../components/common/Image";
-import { SearchInput } from "../../components/common/SearchInput";
+import { SearchInput } from "../../components/common/SearchInput/ProjectCode";
 
 export const HomePage: React.FC = () => {
   const handleJoinSuccess = (projectId: number, guestId: number) => {

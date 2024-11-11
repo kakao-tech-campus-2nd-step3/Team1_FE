@@ -15,7 +15,7 @@ export const userMockHandler = [
       ctx.status(200),
       ctx.json({
         resultData: userData,
-      })
+      }),
     );
   }),
 ];

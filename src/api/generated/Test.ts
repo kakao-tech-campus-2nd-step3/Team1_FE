@@ -9,10 +9,19 @@
  * ---------------------------------------------------------------
  */
 
-import { Create, CreateTestData, GetList, GetTestData, GetTestListData, MemberCodeCreateData } from "./data-contracts";
+import {
+  Create,
+  CreateTestData,
+  GetList,
+  GetTestData,
+  GetTestListData,
+  MemberCodeCreateData,
+} from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Test<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Test<
+  SecurityDataType = unknown,
+> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *

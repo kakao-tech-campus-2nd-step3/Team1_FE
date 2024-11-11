@@ -86,7 +86,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^12.0.0",
     "eslint-plugin-storybook": "^0.8.0",
-    "msw": "^1.3.3",
+    "msw": "^1.3.5",
     "swagger-typescript-api": "^13.0.22"
   }
 }

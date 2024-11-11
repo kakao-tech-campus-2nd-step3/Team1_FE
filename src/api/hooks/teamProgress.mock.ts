@@ -1,65 +1,119 @@
 import { rest } from "msw";
 
-import type { Role } from "@/types/index";
-
-import { getTeamProgressPath } from "./useTeamProgress";
-
-const mockTeamProgressData = [
-  {
-    teamMember: {
-      id: 101,
-      name: "춘식이",
-      role: "developer" as Role,
-      imageURL: "https://via.placeholder.com/40",
-    },
-    progress: 3,
-    activeTasks: [
-      {
-        id: 1,
-        name: "진행 중인 태스크 1",
-        progress: 30,
-        description: "설명",
-        startDate: "2024-10-01T09:00:00Z",
-        endDate: "2024-10-10T17:00:00Z",
-      },
-    ],
-  },
-  {
-    teamMember: {
-      id: 102,
-      name: "라이언",
-      role: "developer" as Role,
-      imageURL: "https://via.placeholder.com/40",
-    },
-    progress: 90,
-    activeTasks: [
-      {
-        id: 2,
-        name: "진행 중인 태스크 2",
-        progress: 30,
-        description: "설명",
-        startDate: "2024-10-15T09:00:00Z",
-        endDate: "2024-10-20T17:00:00Z",
-      },
-    ],
-  },
-  {
-    teamMember: {
-      id: 103,
-      name: "가나다라마바사아자차카타파하",
-      role: "designer" as Role,
-      imageURL: "https://via.placeholder.com/40",
-    },
-    progress: 30,
-    activeTasks: [],
-  },
-];
-
 export const teamProgressMockHandler = [
-  rest.get(getTeamProgressPath(1), (_, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({ teamProgress: mockTeamProgressData })
-    );
-  }),
+  rest.get(
+    `https://seamlessup.com/api/project/:projectId/task/progress`,
+    (_, res, ctx) => {
+      return res(ctx.status(200), ctx.json(mockTeamProgressData));
+    }
+  ),
 ];
+
+export const mockTeamProgressData = {
+  errorCode: 200,
+  errorMessage: "Success",
+  resultData: [
+    {
+      teamMember: {
+        id: 1,
+        name: "가나다",
+        role: "팀원",
+        imageURL: "",
+      },
+      progress: 1,
+      activeTasks: [
+        {
+          id: 1,
+          name: "태스크1",
+          description: "첫번째 태스크입니다.",
+          ownerId: 1,
+          progress: 1,
+          startDate: "2024-10-10T00:00:00",
+          endDate: "2025-09-03T00:00:00",
+          priority: "HIGH",
+          status: 50,
+        },
+        {
+          id: 2,
+          name: "태스크2",
+          description: "첫번째 태스크입니다.",
+          ownerId: 1,
+          progress: 60,
+          startDate: "2024-10-10T00:00:00",
+          endDate: "2025-09-03T00:00:00",
+          priority: "HIGH",
+          status: 50,
+        },
+      ],
+    },
+    {
+      teamMember: {
+        id: 2,
+        name: "라마바",
+        role: "팀원",
+        imageURL: "",
+      },
+      progress: 10,
+      activeTasks: [],
+    },
+    {
+      teamMember: {
+        id: 3,
+        name: "사아자",
+        role: "팀원",
+        imageURL: "",
+      },
+      progress: 30,
+      activeTasks: [],
+    },
+    {
+      teamMember: {
+        id: 4,
+        name: "차카타",
+        role: "팀원",
+        imageURL: "",
+      },
+      progress: 50,
+      activeTasks: [
+        {
+          id: 1,
+          name: "태스크1",
+          description: "첫번째 태스크입니다.",
+          ownerId: 1,
+          progress: 1,
+          startDate: "2024-10-10T00:00:00",
+          endDate: "2025-09-03T00:00:00",
+          priority: "HIGH",
+          status: 50,
+        },
+      ],
+    },
+    {
+      teamMember: {
+        id: 5,
+        name: "가나다라마바사아자차카타파하",
+        role: "팀원",
+        imageURL: "",
+      },
+      progress: 90,
+      activeTasks: [
+        {
+          id: 1,
+          name: "태스크1",
+          description: "첫번째 태스크입니다.",
+          ownerId: 1,
+          progress: 60,
+          startDate: "2024-10-10T00:00:00",
+          endDate: "2025-09-03T00:00:00",
+          priority: "HIGH",
+          status: 50,
+        },
+      ],
+    },
+  ],
+  size: 2147483647,
+  page: 0,
+  pages: 1,
+  hasNext: false,
+  total: 3,
+};

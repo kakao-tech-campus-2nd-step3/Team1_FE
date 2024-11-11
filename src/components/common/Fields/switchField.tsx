@@ -5,7 +5,7 @@ interface SwitchFieldProps {
   description?: string;
   id: string;
   isChecked: boolean;
-  onChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const SwitchField = ({

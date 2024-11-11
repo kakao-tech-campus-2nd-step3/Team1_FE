@@ -2,8 +2,20 @@ import styled from "@emotion/styled";
 import { MoreVertical } from "lucide-react";
 import React from "react";
 
+type ProjectOption = {
+  type: "basic" | "custom";
+  customOption?: {
+    celebrationEffect: boolean;
+    colorChange: boolean;
+    emailNotification: boolean;
+  };
+};
+
 type Props = {
   title: string;
+  startDate: string;
+  endDate: string;
+  option: ProjectOption;
   imageSrc?: string;
   width?: number | string;
   height?: number | string;
@@ -11,22 +23,40 @@ type Props = {
 
 export const ProjectCard: React.FC<Props> = ({
   title,
+  startDate,
+  endDate,
+  option,
   imageSrc,
   width,
   height,
-}) => (
-  <Wrapper width={width} height={height}>
-    <ImageArea>
-      {imageSrc ? <StyledImage src={imageSrc} alt="" /> : <PurpleBackground />}
-    </ImageArea>
-    <SettingsButton>
-      <MoreVertical size={16} />
-    </SettingsButton>
-    <TextArea>
-      <Title>{title}</Title>
-    </TextArea>
-  </Wrapper>
-);
+}) => {
+  const handleSettingsClick = () => {
+    console.log("Project details:", {
+      title,
+      startDate,
+      endDate,
+      option,
+    });
+  };
+
+  return (
+    <Wrapper width={width} height={height}>
+      <ImageArea>
+        {imageSrc ? (
+          <StyledImage src={imageSrc} alt="" />
+        ) : (
+          <PurpleBackground />
+        )}
+      </ImageArea>
+      <SettingsButton onClick={handleSettingsClick}>
+        <MoreVertical size={16} />
+      </SettingsButton>
+      <TextArea>
+        <Title>{title}</Title>
+      </TextArea>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div<{
   width?: number | string;
@@ -54,7 +84,7 @@ const StyledImage = styled.img`
 const PurpleBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #9f7aea;
+  background-color: #d9d9ff;
 `;
 
 const SettingsButton = styled.button`

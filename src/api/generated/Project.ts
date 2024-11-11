@@ -24,91 +24,41 @@ import {
   GetMemberData,
   GetMemberList,
   GetMemberListData,
+  GetMemberProgressData,
   GetOptionData,
   GetOptionListData,
   GetProjectData,
+  GetProjectDateData,
   GetProjectListData,
-  GetProjectMembersData,
-  GetProjectPeriodData,
-  GetTaskData,
+  GetProjectOptionsData,
+  GetProjectProgressData,
   GetTaskListData,
   InviteMemberToProjectData,
   InviteRequestDTO,
   OptionCreate,
+  OptionUpdate,
   ProjectCreate,
   ProjectUpdate,
   TaskCreate,
   TaskUpdate,
   UpdateMember,
   UpdateMemberData,
-  UpdateOption,
   UpdateOptionData,
   UpdateProjectData,
   UpdateTaskData,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
 
-export class Project<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
-  /**
-   * No description
-   *
-   * @tags 팀원 관리
-   * @name GetMember
-   * @summary 팀원 개별 조회
-   * @request GET:/api/project/{project_id}/member/{member_id}
-   * @secure
-   * @response `200` `GetMemberData` OK
-   */
-  getMember = (projectId: number, memberId: number, params: RequestParams = {}) =>
-    this.request<GetMemberData, any>({
-      path: `/api/project/${projectId}/member/${memberId}`,
-      method: "GET",
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 팀원 관리
-   * @name UpdateMember
-   * @summary 팀원 정보 수정
-   * @request PUT:/api/project/{project_id}/member/{member_id}
-   * @secure
-   * @response `200` `UpdateMemberData` OK
-   */
-  updateMember = (projectId: number, memberId: number, data: UpdateMember, params: RequestParams = {}) =>
-    this.request<UpdateMemberData, any>({
-      path: `/api/project/${projectId}/member/${memberId}`,
-      method: "PUT",
-      body: data,
-      secure: true,
-      type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 팀원 관리
-   * @name DeleteMember
-   * @summary 팀원 삭제
-   * @request DELETE:/api/project/{project_id}/member/{member_id}
-   * @secure
-   * @response `200` `DeleteMemberData` OK
-   */
-  deleteMember = (projectId: number, memberId: number, params: RequestParams = {}) =>
-    this.request<DeleteMemberData, any>({
-      path: `/api/project/${projectId}/member/${memberId}`,
-      method: "DELETE",
-      secure: true,
-      ...params,
-    });
+export class Project<
+  SecurityDataType = unknown,
+> extends HttpClient<SecurityDataType> {
   /**
    * No description
    *
    * @tags 프로젝트
    * @name GetProject
    * @summary 프로젝트 조회
-   * @request GET:/api/project/{project-id}
+   * @request GET:/api/project/{projectId}
    * @secure
    * @response `200` `GetProjectData` OK
    */
@@ -125,11 +75,15 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * @tags 프로젝트
    * @name UpdateProject
    * @summary 프로젝트 설정 수정
-   * @request PUT:/api/project/{project-id}
+   * @request PUT:/api/project/{projectId}
    * @secure
    * @response `200` `UpdateProjectData` OK
    */
-  updateProject = (projectId: number, data: ProjectUpdate, params: RequestParams = {}) =>
+  updateProject = (
+    projectId: number,
+    data: ProjectUpdate,
+    params: RequestParams = {}
+  ) =>
     this.request<UpdateProjectData, any>({
       path: `/api/project/${projectId}`,
       method: "PUT",
@@ -144,7 +98,7 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * @tags 프로젝트
    * @name DeleteProject
    * @summary 프로젝트 삭제
-   * @request DELETE:/api/project/{project-id}
+   * @request DELETE:/api/project/{projectId}
    * @secure
    * @response `200` `DeleteProjectData` OK
    */
@@ -158,17 +112,66 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
   /**
    * No description
    *
-   * @tags 태스크
-   * @name GetTask
-   * @summary 태스크 단건 조회
-   * @request GET:/api/project/task/{taskId}
+   * @tags 팀원 관리
+   * @name GetMember
+   * @summary 팀원 개별 조회
+   * @request GET:/api/project/{projectId}/member/{memberId}
    * @secure
-   * @response `200` `GetTaskData` OK
+   * @response `200` `GetMemberData` OK
    */
-  getTask = (taskId: number, params: RequestParams = {}) =>
-    this.request<GetTaskData, any>({
-      path: `/api/project/task/${taskId}`,
+  getMember = (
+    projectId: number,
+    memberId: number,
+    params: RequestParams = {}
+  ) =>
+    this.request<GetMemberData, any>({
+      path: `/api/project/${projectId}/member/${memberId}`,
       method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags 팀원 관리
+   * @name UpdateMember
+   * @summary 팀원 정보 수정
+   * @request PUT:/api/project/{projectId}/member/{memberId}
+   * @secure
+   * @response `200` `UpdateMemberData` OK
+   */
+  updateMember = (
+    projectId: number,
+    memberId: number,
+    data: UpdateMember,
+    params: RequestParams = {}
+  ) =>
+    this.request<UpdateMemberData, any>({
+      path: `/api/project/${projectId}/member/${memberId}`,
+      method: "PUT",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags 팀원 관리
+   * @name DeleteMember
+   * @summary 팀원 삭제
+   * @request DELETE:/api/project/{projectId}/member/{memberId}
+   * @secure
+   * @response `200` `DeleteMemberData` OK
+   */
+  deleteMember = (
+    projectId: number,
+    memberId: number,
+    params: RequestParams = {}
+  ) =>
+    this.request<DeleteMemberData, any>({
+      path: `/api/project/${projectId}/member/${memberId}`,
+      method: "DELETE",
       secure: true,
       ...params,
     });
@@ -235,7 +238,11 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * @secure
    * @response `200` `UpdateOptionData` OK
    */
-  updateOption = (optionId: number, data: UpdateOption, params: RequestParams = {}) =>
+  updateOption = (
+    optionId: number,
+    data: OptionUpdate,
+    params: RequestParams = {}
+  ) =>
     this.request<UpdateOptionData, any>({
       path: `/api/project/option/${optionId}`,
       method: "PUT",
@@ -249,7 +256,7 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    *
    * @tags 프로젝트 옵션
    * @name DeleteOption
-   * @summary 옵션 수정
+   * @summary 옵션 삭제
    * @request DELETE:/api/project/option/{optionId}
    * @secure
    * @response `200` `DeleteOptionData` OK
@@ -275,7 +282,7 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
     query: {
       param: GetList;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<GetProjectListData, any>({
       path: `/api/project`,
@@ -306,49 +313,6 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
   /**
    * No description
    *
-   * @tags 팀원 관리
-   * @name GetMemberList
-   * @summary 팀원 전체 조회
-   * @request GET:/api/project/{project_id}/member
-   * @secure
-   * @response `200` `GetMemberListData` OK
-   */
-  getMemberList = (
-    projectId: number,
-    query: {
-      memberListRequestDTO: GetMemberList;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<GetMemberListData, any>({
-      path: `/api/project/${projectId}/member`,
-      method: "GET",
-      query: query,
-      secure: true,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 팀원 관리
-   * @name CreateMember
-   * @summary 새 팀원 추가
-   * @request POST:/api/project/{project_id}/member
-   * @secure
-   * @response `200` `CreateMemberData` OK
-   */
-  createMember = (projectId: string, data: CreateMember, params: RequestParams = {}) =>
-    this.request<CreateMemberData, any>({
-      path: `/api/project/${projectId}/member`,
-      method: "POST",
-      body: data,
-      secure: true,
-      type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
    * @tags 태스크
    * @name GetTaskList
    * @summary 프로젝트 아이디로 태스크 리스트 조회
@@ -359,9 +323,13 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
   getTaskList = (
     projectId: number,
     query: {
+      /** @format int32 */
+      status?: number;
+      priority?: string;
+      owner?: string;
       param: GetList;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<GetTaskListData, any>({
       path: `/api/project/${projectId}/task`,
@@ -380,9 +348,60 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * @secure
    * @response `200` `CreateTaskData` OK
    */
-  createTask = (projectId: number, data: TaskCreate, params: RequestParams = {}) =>
+  createTask = (
+    projectId: number,
+    data: TaskCreate,
+    params: RequestParams = {}
+  ) =>
     this.request<CreateTaskData, any>({
       path: `/api/project/${projectId}/task`,
+      method: "POST",
+      body: data,
+      secure: true,
+      type: ContentType.Json,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags 팀원 관리
+   * @name GetMemberList
+   * @summary 팀원 전체 조회
+   * @request GET:/api/project/{projectId}/member
+   * @secure
+   * @response `200` `GetMemberListData` OK
+   */
+  getMemberList = (
+    projectId: number,
+    query: {
+      memberListRequestDTO: GetMemberList;
+    },
+    params: RequestParams = {}
+  ) =>
+    this.request<GetMemberListData, any>({
+      path: `/api/project/${projectId}/member`,
+      method: "GET",
+      query: query,
+      secure: true,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags 팀원 관리
+   * @name CreateMember
+   * @summary 새 팀원 추가
+   * @request POST:/api/project/{projectId}/member
+   * @secure
+   * @response `200` `CreateMemberData` OK
+   */
+  createMember = (
+    projectId: string,
+    data: CreateMember,
+    params: RequestParams = {}
+  ) =>
+    this.request<CreateMemberData, any>({
+      path: `/api/project/${projectId}/member`,
       method: "POST",
       body: data,
       secure: true,
@@ -395,13 +414,13 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * @tags 참여 링크 생성
    * @name GenerateInviteLink
    * @summary 팀원초대 코드 생성
-   * @request POST:/api/project/{projectId}/invite-link/{userId}
+   * @request POST:/api/project/{projectId}/invite-link
    * @secure
    * @response `200` `GenerateInviteLinkData` OK
    */
-  generateInviteLink = (projectId: number, userId: number, params: RequestParams = {}) =>
+  generateInviteLink = (projectId: number, params: RequestParams = {}) =>
     this.request<GenerateInviteLinkData, any>({
-      path: `/api/project/${projectId}/invite-link/${userId}`,
+      path: `/api/project/${projectId}/invite-link`,
       method: "POST",
       secure: true,
       ...params,
@@ -420,7 +439,7 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
     query: {
       param: GetList;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
     this.request<GetOptionListData, any>({
       path: `/api/project/option`,
@@ -458,7 +477,10 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * @secure
    * @response `200` `InviteMemberToProjectData` OK
    */
-  inviteMemberToProject = (data: InviteRequestDTO, params: RequestParams = {}) =>
+  inviteMemberToProject = (
+    data: InviteRequestDTO,
+    params: RequestParams = {}
+  ) =>
     this.request<InviteMemberToProjectData, any>({
       path: `/api/project/invite`,
       method: "POST",
@@ -470,16 +492,64 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
   /**
    * No description
    *
-   * @tags 프로젝트
-   * @name GetProjectMembers
-   * @summary 프로젝트 멤버 조회
-   * @request GET:/api/project/{project-id}/members
+   * @tags 태스크
+   * @name GetMemberProgress
+   * @summary 팀 전체 진행도 확인
+   * @request GET:/api/project/{projectId}/task/progress
    * @secure
-   * @response `200` `GetProjectMembersData` OK
+   * @response `200` `GetMemberProgressData` OK
    */
-  getProjectMembers = (projectId: number, params: RequestParams = {}) =>
-    this.request<GetProjectMembersData, any>({
-      path: `/api/project/${projectId}/members`,
+  getMemberProgress = (
+    projectId: number,
+    query: {
+      param: GetList;
+    },
+    params: RequestParams = {}
+  ) =>
+    this.request<GetMemberProgressData, any>({
+      path: `/api/project/${projectId}/task/progress`,
+      method: "GET",
+      query: query,
+      secure: true,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags 태스크
+   * @name GetProjectProgress
+   * @summary 팀원 개별 진행도 및 할당된 태스크 확인
+   * @request GET:/api/project/{projectId}/progress
+   * @secure
+   * @response `200` `GetProjectProgressData` OK
+   */
+  getProjectProgress = (
+    projectId: number,
+    query: {
+      param: GetList;
+    },
+    params: RequestParams = {}
+  ) =>
+    this.request<GetProjectProgressData, any>({
+      path: `/api/project/${projectId}/progress`,
+      method: "GET",
+      query: query,
+      secure: true,
+      ...params,
+    });
+  /**
+   * No description
+   *
+   * @tags 프로젝트
+   * @name GetProjectOptions
+   * @summary 프로젝트 옵션 조회
+   * @request GET:/api/project/{projectId}/option
+   * @secure
+   * @response `200` `GetProjectOptionsData` OK
+   */
+  getProjectOptions = (projectId: number, params: RequestParams = {}) =>
+    this.request<GetProjectOptionsData, any>({
+      path: `/api/project/${projectId}/option`,
       method: "GET",
       secure: true,
       ...params,
@@ -488,20 +558,20 @@ export class Project<SecurityDataType = unknown> extends HttpClient<SecurityData
    * No description
    *
    * @tags 프로젝트
-   * @name GetProjectPeriod
+   * @name GetProjectDate
    * @summary 프로젝트 기간 리스트 조회
-   * @request GET:/api/project/periods
+   * @request GET:/api/project/date
    * @secure
-   * @response `200` `GetProjectPeriodData` OK
+   * @response `200` `GetProjectDateData` OK
    */
-  getProjectPeriod = (
+  getProjectDate = (
     query: {
       param: GetList;
     },
-    params: RequestParams = {},
+    params: RequestParams = {}
   ) =>
-    this.request<GetProjectPeriodData, any>({
-      path: `/api/project/periods`,
+    this.request<GetProjectDateData, any>({
+      path: `/api/project/date`,
       method: "GET",
       query: query,
       secure: true,

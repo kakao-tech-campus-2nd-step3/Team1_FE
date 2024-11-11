@@ -44,13 +44,13 @@ export const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     <>
       <ModalOverlay />
       <StyledModalContent>
-        <ModalHeader as="h1" fontSize={46} fontWeight={800} mb={20}>
+        <ModalHeader as="h1" fontSize={35} fontWeight={800} mb={10}>
           Hi, Welcome!
           <br />
           Nice Meet You
         </ModalHeader>
         <ModalCloseButton />
-        <VStack spacing={7} align="stretch">
+        <VStack spacing={5} align="stretch">
           <StyledButton onClick={loginWithGoogle}>
             <IconWrapper>
               <FcGoogle />
@@ -76,7 +76,7 @@ export const LoginModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 };
 
 const StyledModalContent = styled(ModalContent)`
-  height: 45vh;
+  height: 55vh;
   background-color: #f0f3fb;
   border-radius: 20px;
   padding-left: 2rem;
